@@ -27,6 +27,7 @@ modules:
     requires:
       - name: cap-draftest-db
       - name: cap-draftest-auth
+      - name: cap-draftest-destination
 
   - name: cap-draftest-db-deployer
     type: hdb
@@ -51,3 +52,8 @@ resources:
       config:
         xsappname: cap-draftest-${org}-${space}
         tenant-mode: dedicated
+  - name: cap-draftest-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
