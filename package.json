@@ -1,33 +1,41 @@
 {
-  "name": "cap-draftest",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^7",
-    "express": "^4",
-    "@sap/xssec": "^3",
-    "@sap/cds-hana": "^2"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^7",
-    "@sap/eslint-plugin-cds": "^3",
-    "eslint": "^9"
-  },
-  "scripts": {
-    "start": "cds-serve",
-    "deploy": "npm i && mbt build && cf deploy mta_archives/cap-draftest_1.0.0.mtar --retries 1"
-  },
-  "cds": {
-    "requires": {
-      "[production]": {
-        "auth": "xsuaa",
-        "db": "hana"
-      },
-      "destinations": true
-    }
-  }
+    "name": "cap-draftest",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^7",
+        "@sap/cds-hana": "^2",
+        "@sap/xssec": "^3",
+        "express": "^4"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/eslint-plugin-cds": "^3",
+        "@sap/ux-specification": "UI5-1.124",
+        "eslint": "^9",
+        "rimraf": "^5.0.5"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "deploy": "npm i && mbt build && cf deploy mta_archives/cap-draftest_1.0.0.mtar --retries 1",
+        "watch-draftfe": "cds watch --open draftfe/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy cap-draftest --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive"
+    },
+    "cds": {
+        "requires": {
+            "[production]": {
+                "auth": "xsuaa",
+                "db": "hana"
+            },
+            "destinations": true
+        }
+    },
+    "sapux": [
+        "app/draftfe"
+    ]
 }
