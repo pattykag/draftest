@@ -6,7 +6,7 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "@sap/cds": "^7",
+        "@sap/cds": "^7.5.3",
         "@sap/cds-hana": "^2",
         "@sap/xssec": "^3",
         "express": "^4"
@@ -31,6 +31,10 @@
             "[production]": {
                 "auth": "xsuaa",
                 "db": "hana"
+            },
+            "fiori": {
+                "lean_draft": true,
+                "bypass_draft": true
             },
             "destinations": true
         }

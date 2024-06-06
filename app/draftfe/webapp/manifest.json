@@ -50,7 +50,8 @@
                 "sap.m": {},
                 "sap.ui.core": {},
                 "sap.ushell": {},
-                "sap.fe.templates": {}
+                "sap.fe.templates": {},
+                "sap.f": {}
             }
         },
         "contentDensities": {
@@ -79,20 +80,35 @@
             }
         },
         "resources": {
-            "css": []
+            "css": [
+                {
+                    "uri": "css/styles.css"
+                }
+            ]
         },
         "routing": {
-            "config": {},
+            "config": {
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                },
+                "routerClass": "sap.f.routing.Router"
+            },
             "routes": [
                 {
                     "pattern": ":?query:",
                     "name": "UsersList",
-                    "target": "UsersList"
+                    "target": [
+                        "UsersList"
+                    ]
                 },
                 {
                     "pattern": "Users({key}):?query:",
                     "name": "UsersObjectPage",
-                    "target": "UsersObjectPage"
+                    "target": [
+                        "UsersList",
+                        "UsersObjectPage"
+                    ]
                 }
             ],
             "targets": {
@@ -117,9 +133,12 @@
                                         "type": "ResponsiveTable"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": "Enabled"
                         }
-                    }
+                    },
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern": ""
                 },
                 "UsersObjectPage": {
                     "type": "Component",
@@ -130,9 +149,17 @@
                             "editableHeaderContent": false,
                             "contextPath": "/Users"
                         }
-                    }
+                    },
+                    "controlAggregation": "midColumnPages",
+                    "contextPattern": "/Users({key})"
                 }
             }
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
         }
     },
     "sap.fiori": {
